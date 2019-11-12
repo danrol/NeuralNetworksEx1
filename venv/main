@@ -1,0 +1,23 @@
+import numpy as np
+import tensorflow as tf
+
+
+def build_xor_neural_neutwork(matrix_data, k, bypass, w1, w2, biases, output_neuron_bias):
+    num_input_neurons = 2
+    temp = 0.001
+
+
+if __name__ == '__main__':
+    train_data_set = [[0, 0], [1, 0], [0, 1], [1, 1]]
+
+    k = 4
+    w1 = [-1, -1, 1, 1, -1, 1, -1, 1]
+    w2 = [-1, 1, 1, -1]
+    biases = [-0.5, 0.5, 0.5, -2.5]
+    output_neuron_bias = -0.5
+    bypass = False
+    print(f'k = {k} \nweights between inputs to hidden layer = {w1}\nweights between hidden layer to output layer = {w2}'
+          f'\nhidden layer biases = {biases}\noutput layer bias = {output_neuron_bias}')
+
+    #(truth_table_result, avg_square_error) =  build_xor_neural_neutwork(train_data_set, k, bypass, w1, w2, biases, output_neuron_bias)
+
