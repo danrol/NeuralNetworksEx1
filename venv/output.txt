@@ -1,0 +1,21 @@
+k = 4 neural network truth table result  = 
+[[0.]
+ [1.]
+ [1.]
+ [0.]], 
+expected result = [[0], [1], [1], [0]], loss = 0.0
+
+k = 2 neural network truth table result  = 
+[[0.]
+ [1.]
+ [1.]
+ [0.]], 
+expected result = [[0], [1], [1], [0]], loss = 0.0
+
+k = 1 neural network truth table result  = 
+[[0.]
+ [1.]
+ [1.]
+ [0.]], 
+expected result = [[0], [1], [1], [0]], loss = 0.0
+

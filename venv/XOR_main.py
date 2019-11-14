@@ -47,6 +47,12 @@ def build_xor_neural_network(matrix, excepted, k, predefined_w1, predefined_w2, 
     result = sess.run([final_output, loss], {x: matrix, y: excepted})
     return result
 
+def write_output_to_file(result_str, k, text_file):
+    (truth_table_result, avg_square_error) = result
+    result_str = f'k = {k} neural network truth table result  = \n{truth_table_result}, \n' \
+             f'expected result = {expected_results}, loss = {avg_square_error}\n\n'
+    print(result_str)
+    text_file.write(result_str)
 
 if __name__ == '__main__':
     input_train_x = [[0, 0], [0, 1], [1, 0], [1, 1]]
@@ -62,10 +68,10 @@ if __name__ == '__main__':
     print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
           f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
           f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+    result = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
                                                                       predefined_w2, biases, output_neuron_bias)
-    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
-          f'loss = {avg_square_error}\n')
+    text_file = open("output.txt", "w")
+    write_output_to_file(result, k, text_file)
     ##### End of block Of code dealing with number of hidden neurons equal to 4 ####
 
     ##### Start of block Of code dealing with number of hidden neurons equal to 2 ####
@@ -77,10 +83,9 @@ if __name__ == '__main__':
     print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
           f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
           f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
-                                                                      predefined_w2, biases, output_neuron_bias)
-    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
-          f'loss = {avg_square_error}\n')
+    result = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+                                      predefined_w2, biases, output_neuron_bias)
+    write_output_to_file(result, k, text_file)
     ##### End of block Of code dealing with number of hidden neurons equal to 2 ####
 
     ##### Start of block Of code dealing with number of hidden neurons equal to 1 ####
@@ -92,8 +97,8 @@ if __name__ == '__main__':
     print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
           f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
           f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
-                                                                      predefined_w2, biases, output_neuron_bias)
-    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
-          f'loss = {avg_square_error}\n')
+    result = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+                                      predefined_w2, biases, output_neuron_bias)
+    write_output_to_file(result, k, text_file)
     ##### End of block Of code dealing with number of hidden neurons equal to 1 ####
+    text_file.close()
