@@ -1,14 +1,18 @@
 import numpy as np
 import tensorflow as tf
+
 tf.compat.v1.disable_eager_execution()
 
 
-def build_xor_neural_network(matrix, excepted, k, predefined_w1, predefined_w2, hidden_layer_biases, output_neuron_bias):
+# method that builds xor neural network. Method returns truth table result of XOR and average square error
+def build_xor_neural_network(matrix, excepted, k, predefined_w1, predefined_w2, hidden_layer_biases,
+                             output_neuron_bias):
     amount_input_neurons = 2
     amount_output_neurons = 1
-    bypass = amount_input_neurons + k
+    bypass = amount_input_neurons + k #used in case hidden layer build only from one layer
     temperature = 0.001
 
+    # define placeholder that will be used later after tensorflow session starts
     x = tf.compat.v1.placeholder(tf.float32, [None, amount_input_neurons])
     y = tf.compat.v1.placeholder(tf.float32, [None, amount_output_neurons])
 
@@ -46,32 +50,10 @@ def build_xor_neural_network(matrix, excepted, k, predefined_w1, predefined_w2, 
 
 if __name__ == '__main__':
     input_train_x = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    expected_results = [[0], [1], [1], [0]]
+    expected_results = [[0], [1], [1],
+                        [0]]  # expected results from activating XOR (corresponds to the lists in input_train list)
 
-    k = 1
-    predefined_w1 = np.array([1, 1])
-    predefined_w2 = np.array([-2, 1, 1])
-    biases = [-1.5]
-    output_neuron_bias = [-0.5]
-    print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
-          f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
-          f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1, predefined_w2, biases, output_neuron_bias)
-    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
-          f'loss = {avg_square_error}\n')
-
-    k = 2
-    predefined_w1 = np.array([1, -1, 1, -1])
-    predefined_w2 = np.array([1, 1])
-    biases = [-0.5, 1.5]
-    output_neuron_bias = [-1.5]
-    print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
-          f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
-          f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1, predefined_w2, biases, output_neuron_bias)
-    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
-          f'loss = {avg_square_error}\n')
-
+    ##### Start of block Of code dealing with number of hidden neurons equal to 4 ####
     k = 4
     predefined_w1 = np.array([-1., -1., 1., 1., -1., 1., -1., 1.])
     predefined_w2 = np.array([-1, 1, 1, -1])
@@ -80,6 +62,38 @@ if __name__ == '__main__':
     print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
           f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
           f'\noutput layer bias = {output_neuron_bias}')
-    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1, predefined_w2, biases, output_neuron_bias)
+    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+                                                                      predefined_w2, biases, output_neuron_bias)
     print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
           f'loss = {avg_square_error}\n')
+    ##### End of block Of code dealing with number of hidden neurons equal to 4 ####
+
+    ##### Start of block Of code dealing with number of hidden neurons equal to 2 ####
+    k = 2
+    predefined_w1 = np.array([1, -1, 1, -1])
+    predefined_w2 = np.array([1, 1])
+    biases = [-0.5, 1.5]
+    output_neuron_bias = [-1.5]
+    print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
+          f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
+          f'\noutput layer bias = {output_neuron_bias}')
+    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+                                                                      predefined_w2, biases, output_neuron_bias)
+    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
+          f'loss = {avg_square_error}\n')
+    ##### End of block Of code dealing with number of hidden neurons equal to 2 ####
+
+    ##### Start of block Of code dealing with number of hidden neurons equal to 1 ####
+    k = 1
+    predefined_w1 = np.array([1, 1])
+    predefined_w2 = np.array([-2, 1, 1])
+    biases = [-1.5]
+    output_neuron_bias = [-0.5]
+    print(f'k = {k} \nweights between inputs to hidden layer = {predefined_w1}'
+          f'\nweights between hidden layer to output layer = {predefined_w2}\nhidden layer biases = {biases}'
+          f'\noutput layer bias = {output_neuron_bias}')
+    (truth_table_result, avg_square_error) = build_xor_neural_network(input_train_x, expected_results, k, predefined_w1,
+                                                                      predefined_w2, biases, output_neuron_bias)
+    print(f'neural network truth table result = \n{truth_table_result}, \nexpected result = {expected_results}, '
+          f'loss = {avg_square_error}\n')
+    ##### End of block Of code dealing with number of hidden neurons equal to 1 ####
